@@ -45,10 +45,7 @@
         <local:OrdreVM/>
     </Page.DataContext>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-        
-        
-        <ListView x:Name="LWOrdrer1" HorizontalAlignment="Left" Height="345" VerticalAlignment="Top" Width="1700" ItemsSource="{Binding OrdrerCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedOrdre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="204,0,0,0"/>
+        <ListView x:Name="LWOrdrer1" Visibility="Visible" HorizontalAlignment="Left" Height="345" VerticalAlignment="Top" Width="1704" ItemsSource="{Binding OrdrerCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedOrdre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="206,0,0,0"/>
         <Button x:Name="BTN_Tilbage1" Content="&lt;" HorizontalAlignment="Left" Margin="82,495,0,0" VerticalAlignment="Top" Width="90" Height="90" Background="#CFFFFFFF" FontFamily="Arial" BorderBrush="#DBFFFFFF" FontSize="72" Foreground="#E0333333">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
@@ -79,7 +76,7 @@
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button x:Name="BTN_Opdaterordre1" Content="Opdater Ordre" HorizontalAlignment="Left" Margin="1424,937,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
+        <Button x:Name="BTN_Opdaterordre1" Content="Opdater Ordre" HorizontalAlignment="Left" Margin="1422,937,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpdaterOrdre"/>
@@ -96,6 +93,12 @@
         <TextBlock HorizontalAlignment="Left" Margin="665,350,0,0" TextWrapping="Wrap" Text="Ordre" VerticalAlignment="Top" Width="418" TextAlignment="Center" FontSize="30" FontWeight="SemiBold" Foreground="#D8000000"/>
         <DatePicker HorizontalAlignment="Left" Margin="665,469,0,0" VerticalAlignment="Top" Width="418" Date="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#FFEEEEEE" BorderBrush="#26000000" />
         <TextBox x:Name="TBKundeCVRNummer" HorizontalAlignment="Left" Margin="665,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="417" Background="#FFEEEEEE" BorderBrush="#26000000" PlaceholderText="KundeCVRnummer" Text="{Binding KundeCVRnummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox HorizontalAlignment="Left" Margin="54,44,0,0" TextWrapping="Wrap" Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="54,44,0,0" TextWrapping="Wrap" Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="TextChanged">
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SearchFilter"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+        </TextBox>
     </Grid>
 </Page>

@@ -48,7 +48,7 @@ namespace _1.semesterprojekt
             else
             {
                 OrdreNummer = i.ToString();
-            }           
+            }
             Laminering = laminering;
             Fragt = fragt;
             OpTil10 = opTil10;
@@ -68,25 +68,28 @@ namespace _1.semesterprojekt
         //    foreach (var p in ProduktCollection)
         //    {
         //        Produkter += "Produktid: " + p.Id + ", Navn: " + p.ProduktNavn + ", Type: " + p.Produkttype + ", Medie: " + p.Medie + ", Folie: " + p.Folie + ", Farve: " + p.Farve + ", Længde: " + p.Længde + ", Bredde: " + p.Bredde + ", Antal: " + p.Antal + ", Kvadratmeter: " + p.KvadratM;
-        //        if (p.Laminering)
+        //        foreach (var o in OrdreVM.OrdrerCollection)
         //        {
-        //            Produkter += ", " + p.Laminering.ToString().Replace(Convert.ToString(p.Laminering), "Laminering");
-        //        }
-        //        if (p.Fragt)
-        //        {
-        //            Produkter += ", " + p.Fragt.ToString().Replace(Convert.ToString(p.Fragt), "Fragt");
-        //        }
-        //        if (p.OpTil10)
-        //        {
-        //            Produkter += ", " + p.OpTil10.ToString().Replace(Convert.ToString(p.OpTil10), "Op til 10%");
-        //        }
-        //        if (p.Montering)
-        //        {
-        //            Produkter += ", " + p.Montering.ToString().Replace(Convert.ToString(p.Montering), "Montering");
-        //        }
-        //        if (p.Afhentes)
-        //        {
-        //            Produkter += ", " + p.Afhentes.ToString().Replace(Convert.ToString(p.Afhentes), "Afhentes");
+        //            if (o.Laminering)
+        //            {
+        //                Produkter += ", " + o.Laminering.ToString().Replace(Convert.ToString(o.Laminering), "Laminering");
+        //            }
+        //            if (o.Fragt)
+        //            {
+        //                Produkter += ", " + o.Fragt.ToString().Replace(Convert.ToString(o.Fragt), "Fragt");
+        //            }
+        //            if (o.OpTil10)
+        //            {
+        //                Produkter += ", " + o.OpTil10.ToString().Replace(Convert.ToString(o.OpTil10), "Op til 10%");
+        //            }
+        //            if (o.Montering)
+        //            {
+        //                Produkter += ", " + o.Montering.ToString().Replace(Convert.ToString(o.Montering), "Montering");
+        //            }
+        //            if (o.Afhentes)
+        //            {
+        //                Produkter += ", " + o.Afhentes.ToString().Replace(Convert.ToString(o.Afhentes), "Afhentes");
+        //            }
         //        }
         //    }
         //    return $"{nameof(OrdreNummer)}: {OrdreNummer}, {nameof(DateTime)}: {DateTime}, {nameof(KundeCVRnummer)}: {KundeCVRnummer}, {"Produkter"}: {Produkter}";

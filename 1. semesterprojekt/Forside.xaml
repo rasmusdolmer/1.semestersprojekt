@@ -32,22 +32,22 @@
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button Content="Se Brugere" HorizontalAlignment="Left" Margin="534,498,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
-            <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="Click">
-                    <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.SeBrugere"/>
-                </Core:EventTriggerBehavior>
-            </Interactivity:Interaction.Behaviors>
-        </Button>
 
-        <Button Content="Arkiv" HorizontalAlignment="Left" Margin="534,678,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+        <Button Content="Se Kunder" HorizontalAlignment="Left" Margin="534,678,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.SeKunder"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button Content="Arkiv" HorizontalAlignment="Left" Margin="966,498,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+        <Button Content="Se Brugere" HorizontalAlignment="Left" Margin="966,678,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="Click">
+                    <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.SeBrugere"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+        </Button>
+        <Button Content="Arkiv" HorizontalAlignment="Left" Margin="534,498,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.Arkiv"/>

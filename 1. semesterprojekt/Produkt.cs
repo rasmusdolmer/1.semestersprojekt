@@ -28,7 +28,6 @@ namespace _1.semesterprojekt
 
         public Produkt(string produktNavn, string produkttype, string medie, string folie, string farve, string længde, string bredde, string antal, string kommentar)
         {
-
             if (OrdreVM.ProduktCollection.Count > 0)
             {
                 var GetProdukt = (from produkt in OrdreVM.ProduktCollection select produkt.Id).Max();

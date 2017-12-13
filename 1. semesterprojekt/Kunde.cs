@@ -9,7 +9,6 @@ namespace _1.semesterprojekt
     class Kunde
     {
         public int Id { get; set; }
-        public static int count = 1;
         public string KundeCVRnummer { get; set; }
         public string Navn { get; set; }
         public string Firma { get; set; }
@@ -26,7 +25,15 @@ namespace _1.semesterprojekt
 
         public Kunde(string kundeCVRnummer, string navn, string firma, string adresse, string @by, string postnr, string mail, string telefonnr)
         {
-            Id = count++;
+            if (OrdreVM.KundeCollection.Count > 0)
+            {
+                var GetMaxKundeId = (from kunde in OrdreVM.KundeCollection select kunde.Id).Max();
+                Id = GetMaxKundeId + 1;
+            }
+            else
+            {
+                Id = 1;
+            }
             KundeCVRnummer = kundeCVRnummer;
             Navn = navn;
             Firma = firma;

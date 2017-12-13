@@ -54,7 +54,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <ListView x:Name="LWOrdrer1" HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="959" ItemsSource="{Binding KundeCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedBruger, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="204,0,0,0"/>
+        <ListView x:Name="LWOrdrer1" HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="959" ItemsSource="{Binding KundeCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedKunde, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="204,0,0,0"/>
         <Button x:Name="BTN_Tilbage1" Content="&lt;" HorizontalAlignment="Left" Margin="82,495,0,0" VerticalAlignment="Top" Width="90" Height="90" Background="#CFFFFFFF" FontFamily="Arial" BorderBrush="#DBFFFFFF" FontSize="72" Foreground="#E0333333">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
@@ -63,17 +63,17 @@
             </Interactivity:Interaction.Behaviors>
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="1261,187,0,0" TextWrapping="Wrap" Text="Kunde" VerticalAlignment="Top" Width="420" TextAlignment="Center" FontSize="30" FontWeight="SemiBold" Foreground="#D8000000"/>
-        <Button x:Name="BTN_OpretBruger" Content="Opret Bruger" HorizontalAlignment="Left" Margin="1261,780,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF00E676" FontFamily="Arial" BorderBrush="#7F00C853">
+        <Button x:Name="BTN_OpretKunde" Content="Opret Kunde" HorizontalAlignment="Left" Margin="1261,780,0,0" VerticalAlignment="Top" Width="130" Height="40" Background="#FF00E676" FontFamily="Arial" BorderBrush="#7F00C853">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
-                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpretBruger"/>
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpretKunde"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button x:Name="BTN_OpdaterBruger" Content="Opdater Bruger" HorizontalAlignment="Left" Margin="1443,780,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
+        <Button x:Name="BTN_OpdaterKunde" Content="Opdater Kunde" HorizontalAlignment="Left" Margin="1406,780,0,0" VerticalAlignment="Top" Width="130" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
-                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpdaterBruger"/>
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpdaterKunde"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
@@ -85,6 +85,13 @@
         <TextBox x:Name="TBPostnr" HorizontalAlignment="Left" Margin="1261,577,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Postnr." Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Postnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="TBMail" HorizontalAlignment="Left" Margin="1261,649,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Mail" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="TBTlfnr" HorizontalAlignment="Left" Margin="1261,719,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Telefonnummer" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Telefonnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button x:Name="BTN_SletKunde" Content="Slet Kunde" HorizontalAlignment="Left" Margin="1551,780,0,0" VerticalAlignment="Top" Width="130" Height="40" Background="#FF1744" FontFamily="Arial" BorderBrush="#B71C1C">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="Click">
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SletKunde"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+        </Button>
 
     </Grid>
 </Page>

@@ -35,27 +35,28 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="1210,421,0,0" TextWrapping="Wrap" Text="Bruger" VerticalAlignment="Top" Width="535" TextAlignment="Center" FontSize="30" FontWeight="SemiBold" Foreground="#D8000000"/>
         <TextBox x:Name="TBEmail" HorizontalAlignment="Left" Margin="1210,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="535" Background="#FFEEEEEE" BorderBrush="#26000000" PlaceholderText="Email" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button x:Name="BTN_OpretBruger" Content="Opret Bruger" HorizontalAlignment="Left" Margin="1210,532,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF00E676" FontFamily="Arial" BorderBrush="#7F00C853">
+        <Button x:Name="BTN_OpretBruger" Content="Opret Bruger" HorizontalAlignment="Left" Margin="1210,600,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF00E676" FontFamily="Arial" BorderBrush="#7F00C853">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpretBruger"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button x:Name="BTN_OpdaterBruger" Content="Opdater Bruger" HorizontalAlignment="Left" Margin="1392,532,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
+        <Button x:Name="BTN_OpdaterBruger" Content="Opdater Bruger" HorizontalAlignment="Left" Margin="1392,600,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpdaterBruger"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button x:Name="BTN_SletBruger" Content="Slet Bruger" HorizontalAlignment="Left" Margin="1572,532,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF1744" FontFamily="Arial" BorderBrush="#B71C1C">
+        <Button x:Name="BTN_SletBruger" Content="Slet Bruger" HorizontalAlignment="Left" Margin="1572,600,0,0" VerticalAlignment="Top" Width="173" Height="40" Background="#FF1744" FontFamily="Arial" BorderBrush="#B71C1C">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SletBruger"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
+        <PasswordBox x:Name="TBKodeord" HorizontalAlignment="Left" Margin="1210,535,0,0" VerticalAlignment="Top" Height="56" Width="535" Background="#FFEEEEEE" BorderBrush="#26000000" Password="{Binding Kodeord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 
     </Grid>
