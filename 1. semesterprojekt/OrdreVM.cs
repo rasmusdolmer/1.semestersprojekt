@@ -211,7 +211,7 @@ namespace _1.semesterprojekt
                     BackUpOrdrerCollection.Add(ordre);
                 }
             }         
-            var FilteredOrdrer = (from ordre in BackUpOrdrerCollection where ordre.OrdreNummer.Contains(SearchInput) select ordre).ToList();
+            var FilteredOrdrer = (from ordre in BackUpOrdrerCollection where ordre.OrdreNummer.Contains(SearchInput) || ordre.KundeCVRnummer.Contains(SearchInput) select ordre).ToList();
             if (SearchInput == "")
             {
                 OrdrerCollection.Clear();
