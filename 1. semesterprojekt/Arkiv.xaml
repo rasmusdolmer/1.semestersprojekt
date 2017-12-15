@@ -11,11 +11,27 @@
     <Page.Resources>
         <DataTemplate x:Key="test">
             <Grid>
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <TextBlock TextWrapping="Wrap" Text="{Binding OrdreNummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding KundeCVRnummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <ListView Width="1716" ItemsSource="{Binding ProduktCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedProdukt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Width="1525">
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="89">                    
+                        <Run Text="{Binding OrdreNummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="109">
+                        <Run Text="{Binding KundeCVRnummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="192">
+                        <Run Text="{Binding DateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="196">
+                        <Run Text="{Binding Date.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="123">
+                        <Run Text="{Binding Accepteret, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="100">
+                        <Run Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>
+                    </TextBlock>
+                    <ListView Width="1716" MaxHeight="90" ItemsSource="{Binding ProduktCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -25,8 +41,21 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <ListView x:Name="LWOrdrer" HorizontalAlignment="Left" Height="907" VerticalAlignment="Top" Width="1700" ItemsSource="{Binding DeaktiveredeOrdrerCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedOrdre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="227,0,0,0"/>
+        <ListView x:Name="LWOrdrer1" Visibility="Visible" HorizontalAlignment="Left" Height="840" VerticalAlignment="Top" Width="1704" ItemsSource="{Binding DeaktiveredeOrdrerCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedOrdre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="206,48,0,0" UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ordrenr" FontWeight="Medium" Margin="10,0,40,10"></TextBlock>
+                        <TextBlock Text="Kundenr" FontWeight="Medium" Margin="0,0,50,10"></TextBlock>
+                        <TextBlock Text="Oprettelsesdato" FontWeight="Medium" Margin="0,0,50,10"></TextBlock>
+                        <TextBlock Text="Deadline" FontWeight="Medium" Margin="35,0,50,10"></TextBlock>
+                        <TextBlock Text="Accepteret" FontWeight="Medium" Margin="90,0,50,10"></TextBlock>
+                        <TextBlock Text="Status" FontWeight="Medium" Margin="0,0,50,10"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+        </ListView>
+      
         <Button x:Name="BTN_Tilbage" Content="&lt;" HorizontalAlignment="Left" Margin="82,495,0,0" VerticalAlignment="Top" Width="90" Height="90" Background="#CFFFFFFF" FontFamily="Arial" BorderBrush="#DBFFFFFF" FontSize="72" Foreground="#E0333333">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
@@ -48,6 +77,13 @@
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
+        <TextBox HorizontalAlignment="Left" Margin="206,10,0,0" TextWrapping="Wrap" Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="876" Background="#FFEEEEEE" BorderBrush="#26000000" PlaceholderText="Search input">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="TextChanged">
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SearchFilterDeaktiverede"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+        </TextBox>
 
     </Grid>
 </Page>

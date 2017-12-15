@@ -28,7 +28,7 @@ namespace _1.semesterprojekt
         public bool Montering { get; set; }
         public bool Afhentes { get; set; }
         public bool Accepteret { get; set; }
-        public bool Aktiveret { get; set; }
+        public string Status { get; set; }
 
         public Ordre()
         {
@@ -59,40 +59,7 @@ namespace _1.semesterprojekt
             KundeCVRnummer = kundeCVRnummer;
             ProduktCollection = produktCollection;
             Accepteret = false;
-            Aktiveret = true;
+            Status = "Afventer svar fra kunde";
         }
-
-        //public override string ToString()
-        //{
-        //    string Produkter = "";
-        //    foreach (var p in ProduktCollection)
-        //    {
-        //        Produkter += "Produktid: " + p.Id + ", Navn: " + p.ProduktNavn + ", Type: " + p.Produkttype + ", Medie: " + p.Medie + ", Folie: " + p.Folie + ", Farve: " + p.Farve + ", Længde: " + p.Længde + ", Bredde: " + p.Bredde + ", Antal: " + p.Antal + ", Kvadratmeter: " + p.KvadratM;
-        //        foreach (var o in OrdreVM.OrdrerCollection)
-        //        {
-        //            if (o.Laminering)
-        //            {
-        //                Produkter += ", " + o.Laminering.ToString().Replace(Convert.ToString(o.Laminering), "Laminering");
-        //            }
-        //            if (o.Fragt)
-        //            {
-        //                Produkter += ", " + o.Fragt.ToString().Replace(Convert.ToString(o.Fragt), "Fragt");
-        //            }
-        //            if (o.OpTil10)
-        //            {
-        //                Produkter += ", " + o.OpTil10.ToString().Replace(Convert.ToString(o.OpTil10), "Op til 10%");
-        //            }
-        //            if (o.Montering)
-        //            {
-        //                Produkter += ", " + o.Montering.ToString().Replace(Convert.ToString(o.Montering), "Montering");
-        //            }
-        //            if (o.Afhentes)
-        //            {
-        //                Produkter += ", " + o.Afhentes.ToString().Replace(Convert.ToString(o.Afhentes), "Afhentes");
-        //            }
-        //        }
-        //    }
-        //    return $"{nameof(OrdreNummer)}: {OrdreNummer}, {nameof(DateTime)}: {DateTime}, {nameof(KundeCVRnummer)}: {KundeCVRnummer}, {"Produkter"}: {Produkter}";
-        //}
     }
 }

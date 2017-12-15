@@ -9,23 +9,23 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock HorizontalAlignment="Left" Margin="534,219,0,0" TextWrapping="Wrap" Text="Hovedmenu" VerticalAlignment="Top" Height="58" Width="852" TextAlignment="Center" FontSize="48"/>
-        <Button Content="Se ordrer" HorizontalAlignment="Left" Margin="534,318,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+        <TextBlock HorizontalAlignment="Left" Margin="534,201,0,0" TextWrapping="Wrap" Text="Hovedmenu" VerticalAlignment="Top" Height="58" Width="852" TextAlignment="Center" FontSize="48"/>
+        <Button Content="Se ordrer" HorizontalAlignment="Left" Margin="534,300,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.SeOrdrer"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button x:Name="BTN_Opretordre" Content="Opret ordre" HorizontalAlignment="Left" Margin="966,318,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+        <Button x:Name="BTN_Opretordre" Content="Opret ordre" HorizontalAlignment="Left" Margin="966,300,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.OpretOrdre"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-       
-        <Button x:Name="BTN_Logud" Content="Log Ud" HorizontalAlignment="Left" Margin="534,868,0,0" VerticalAlignment="Top" Height="53" Width="852" Background="#CCE53935" FontSize="28">
+
+        <Button x:Name="BTN_Logud" Content="Log Ud" HorizontalAlignment="Left" Margin="966,660,0,0" VerticalAlignment="Top" Height="168" Width="420" Background="#CCE53935" FontSize="28">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.MainPage"/>
@@ -33,21 +33,21 @@
             </Interactivity:Interaction.Behaviors>
         </Button>
 
-        <Button Content="Se Kunder" HorizontalAlignment="Left" Margin="534,678,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+        <Button Content="Se Kunder" HorizontalAlignment="Left" Margin="534,660,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.SeKunder"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button Content="Se Brugere" HorizontalAlignment="Left" Margin="966,678,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+        <Button Content="Se Brugere" HorizontalAlignment="Left" Margin="534,480,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.SeBrugere"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button Content="Arkiv" HorizontalAlignment="Left" Margin="534,498,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
+        <Button Content="Arkiv" HorizontalAlignment="Left" Margin="966,480,0,0" VerticalAlignment="Top" Height="168" Width="420" FontSize="28" Background="#19000000">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:NavigateToPageAction TargetPage="_1.semesterprojekt.Arkiv"/>

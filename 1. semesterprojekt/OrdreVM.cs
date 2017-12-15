@@ -26,14 +26,17 @@ namespace _1.semesterprojekt
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-       
+
+        public string SelectedSortering { get; set; }
+
         public Produkt SelectedProdukt { get; set; }
         public int SelectedIndex { get; set; }
+
+        public string SearchInput { get; set; }
 
         public static ObservableCollection<Ordre> DeaktiveredeOrdrerCollection { get; set; }
         public static ObservableCollection<Ordre> OrdrerCollection { get; set; }
         public static ObservableCollection<Ordre> BackUpOrdrerCollection { get; set; }
-        public string SearchInput { get; set; }
         public string OrdreNr { get; set; }
         public string KundeCVRnummer { get; set; }
         public Ordre SelectedOrdre { get; set; }
@@ -52,7 +55,7 @@ namespace _1.semesterprojekt
         public bool Montering { get; set; }
         public bool Afhentes { get; set; }
         public bool Accepteret { get; set; }
-        public bool Aktiveret { get; set; }
+        public string Status { get; set; }
 
         public static ObservableCollection<Produkt> ProduktCollection { get; set; }
         public string ProduktNavn { get; set; }
@@ -67,6 +70,7 @@ namespace _1.semesterprojekt
         public string Kommentar { get; set; }
 
         public static ObservableCollection<Kunde> KundeCollection { get; set; }
+        public static ObservableCollection<Kunde> BackUpKundeCollection { get; set; }
         public Kunde SelectedKunde { get; set; }
         public string Navn { get; set; }
         public string Firma { get; set; }
@@ -97,12 +101,13 @@ namespace _1.semesterprojekt
         {
             BackUpOrdrerCollection = new ObservableCollection<Ordre>();
             OrdrerCollection = new ObservableCollection<Ordre>();
+            DeaktiveredeOrdrerCollection = new ObservableCollection<Ordre>();
             ProduktCollection = new ObservableCollection<Produkt>();
             KundeCollection = new ObservableCollection<Kunde>();
-            DeaktiveredeOrdrerCollection = new ObservableCollection<Ordre>();
+            BackUpKundeCollection = new ObservableCollection<Kunde>();
 
             DateTime dt = DateTime.Now;
-            
+
             _date = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, 0, new TimeSpan());
 
             Load();
@@ -125,32 +130,31 @@ namespace _1.semesterprojekt
 
         public void OpretProdukt()
         {
-            ProduktCollection.Add(new Produkt(ProduktNavn, Produkttype, Medie, Folie, Farve, Længde, Bredde, Antal, Kommentar));
-            OnPropertyChanged();
+            if (ProduktNavn != null && Produkttype != null && Medie != null && Folie != null && Farve != null && Længde != null && Bredde != null && Antal != null && Kommentar != null)
+            {
+                ProduktCollection.Add(new Produkt(ProduktNavn, Produkttype, Medie, Folie, Farve, Længde, Bredde, Antal, Kommentar));
+                OnPropertyChanged();
+            }
         }
 
         public void OpretOrdre()
         {
-            KundeCollection.Add(new Kunde(KundeCVRnummer, Navn, Firma, Adresse, By, Postnr, Mail, Telefonnr));
-            OrdrerCollection.Add(new Ordre(Date, Laminering, Fragt, OpTil10, Montering, Afhentes, KundeCVRnummer, ProduktCollection));
-            OnPropertyChanged();
-            SaveOrdrer();
-            SaveKunder();
-            frame.Navigate(typeof(Forside));
-
-            //var SorteretEfterDato = (from ordre in OrdrerCollection orderby ordre.Date descending select ordre);
-            //OrdrerCollection.Clear();
-            //foreach (var ordre in SorteretEfterDato)
-            //{
-            //    OrdrerCollection.Add(ordre);
-            //}
+            if (KundeCVRnummer != null && Navn != null && Mail != null && Telefonnr != null && Date != null && ProduktCollection.Count > 0 && Mail.Contains("@") && Mail.Contains(".") && !Telefonnr.Any(char.IsLetter) && !KundeCVRnummer.Any(char.IsLetter))
+            {
+                KundeCollection.Add(new Kunde(KundeCVRnummer, Navn, Firma, Adresse, By, Postnr, Mail, Telefonnr));
+                OrdrerCollection.Add(new Ordre(Date, Laminering, Fragt, OpTil10, Montering, Afhentes, KundeCVRnummer, ProduktCollection));
+                OnPropertyChanged();
+                SaveKunder();
+                SaveOrdrer();
+                frame.Navigate(typeof(Forside));
+            }
         }
 
         public void SaveOrdrer()
         {
             foreach (var ordre in OrdrerCollection)
             {
-                if (ordre.Aktiveret == false)
+                if (ordre.Status == "Deaktiveret")
                 {
                     OrdrerCollection.Remove(ordre);
                     DeaktiveredeOrdrerCollection.Add(ordre);
@@ -201,7 +205,66 @@ namespace _1.semesterprojekt
                 }
             }
         }
-        
+
+        public void Sorter()
+        {
+            if (BackUpOrdrerCollection.Count == 0)
+            {
+                foreach (var ordre in OrdrerCollection)
+                {
+                    BackUpOrdrerCollection.Add(ordre);
+                }
+            }
+            OrdrerCollection.Clear();
+            #region If statements
+            if (SelectedSortering == "OrdreNummer")
+            {
+                var SorteretOrdre = (from ordre in BackUpOrdrerCollection orderby ordre.OrdreNummer descending select ordre);
+
+                foreach (var ordre in SorteretOrdre)
+                {
+                    OrdrerCollection.Add(ordre);
+                }
+            }
+            if (SelectedSortering == "Deadline")
+            {
+                var SorteretOrdre = (from ordre in BackUpOrdrerCollection orderby ordre.Date select ordre);
+
+                foreach (var ordre in SorteretOrdre)
+                {
+                    OrdrerCollection.Add(ordre);
+                }
+            }
+            if (SelectedSortering == "Oprettelsesdato")
+            {
+                var SorteretOrdre = (from ordre in BackUpOrdrerCollection orderby ordre.DateTime select ordre);
+
+                foreach (var ordre in SorteretOrdre)
+                {
+                    OrdrerCollection.Add(ordre);
+                }
+            }
+            if (SelectedSortering == "KundeNummer")
+            {
+                var SorteretOrdre = (from ordre in BackUpOrdrerCollection orderby ordre.KundeCVRnummer select ordre);
+
+                foreach (var ordre in SorteretOrdre)
+                {
+                    OrdrerCollection.Add(ordre);
+                }
+            }
+            if (SelectedSortering == "Accepteret/annuleret")
+            {
+                var SorteretOrdre = (from ordre in BackUpOrdrerCollection orderby ordre.Accepteret select ordre);
+
+                foreach (var ordre in SorteretOrdre)
+                {
+                    OrdrerCollection.Add(ordre);
+                }
+            }          
+            #endregion
+        }
+
         public void SearchFilter()
         {
             if (BackUpOrdrerCollection.Count == 0)
@@ -210,8 +273,11 @@ namespace _1.semesterprojekt
                 {
                     BackUpOrdrerCollection.Add(ordre);
                 }
-            }         
-            var FilteredOrdrer = (from ordre in BackUpOrdrerCollection where ordre.OrdreNummer.Contains(SearchInput) || ordre.KundeCVRnummer.Contains(SearchInput) select ordre).ToList();
+            }
+            var FilteredOrdrer = (from ordre in BackUpOrdrerCollection where ordre.OrdreNummer.Contains(SearchInput) || 
+                                  ordre.KundeCVRnummer.Contains(SearchInput) || ordre.Status.Contains(SearchInput) || 
+                                  ordre.OrdreNummer.ToLower().Contains(SearchInput) || ordre.KundeCVRnummer.ToLower().Contains(SearchInput) || 
+                                  ordre.Status.ToLower().Contains(SearchInput) select ordre).ToList();
             if (SearchInput == "")
             {
                 OrdrerCollection.Clear();
@@ -228,7 +294,62 @@ namespace _1.semesterprojekt
                     OrdrerCollection.Add(ordre);
                 }
             }
+        }
 
+        public void SearchFilterDeaktiverede()
+        {
+            if (BackUpOrdrerCollection.Count == 0)
+            {
+                foreach (var ordre in DeaktiveredeOrdrerCollection)
+                {
+                    BackUpOrdrerCollection.Add(ordre);
+                }
+            }
+            var FilteredOrdrer = (from ordre in BackUpOrdrerCollection where ordre.OrdreNummer.Contains(SearchInput) || ordre.KundeCVRnummer.Contains(SearchInput) || ordre.Status.Contains(SearchInput) || ordre.OrdreNummer.ToLower().Contains(SearchInput) || ordre.KundeCVRnummer.ToLower().Contains(SearchInput) || ordre.Status.ToLower().Contains(SearchInput) select ordre).ToList();
+            if (SearchInput == "")
+            {
+                DeaktiveredeOrdrerCollection.Clear();
+                foreach (var ordre in BackUpOrdrerCollection)
+                {
+                    DeaktiveredeOrdrerCollection.Add(ordre);
+                }
+            }
+            else
+            {
+                DeaktiveredeOrdrerCollection.Clear();
+                foreach (var ordre in FilteredOrdrer)
+                {
+                    DeaktiveredeOrdrerCollection.Add(ordre);
+                }
+            }
+        }
+
+        public void SearchFilterKunder()
+        {
+            if (BackUpKundeCollection.Count == 0)
+            {
+                foreach (var kunde in KundeCollection)
+                {
+                    BackUpKundeCollection.Add(kunde);
+                }
+            }
+            var FilteredKunde = (from kunde in BackUpKundeCollection where kunde.KundeCVRnummer.Contains(SearchInput) || kunde.Navn.Contains(SearchInput) || kunde.Firma.Contains(SearchInput) || kunde.Adresse.Contains(SearchInput) || kunde.By.Contains(SearchInput) || kunde.Postnr.Contains(SearchInput) || kunde.Mail.Contains(SearchInput) || kunde.Telefonnr.Contains(SearchInput) || kunde.KundeCVRnummer.ToLower().Contains(SearchInput) || kunde.Navn.ToLower().Contains(SearchInput) || kunde.Firma.ToLower().Contains(SearchInput) || kunde.Adresse.ToLower().Contains(SearchInput) || kunde.By.ToLower().Contains(SearchInput) || kunde.Postnr.ToLower().Contains(SearchInput) || kunde.Mail.ToLower().Contains(SearchInput) || kunde.Telefonnr.ToLower().Contains(SearchInput) select kunde).ToList();
+            if (SearchInput == "")
+            {
+                KundeCollection.Clear();
+                foreach (var kunde in BackUpKundeCollection)
+                {
+                    KundeCollection.Add(kunde);
+                }
+            }
+            else
+            {
+                KundeCollection.Clear();
+                foreach (var kunde in FilteredKunde)
+                {
+                    KundeCollection.Add(kunde);
+                }
+            }
         }
 
         public void OpdaterOrdre()
@@ -238,7 +359,7 @@ namespace _1.semesterprojekt
                 var GetOrdre = (from ordre in OrdrerCollection where ordre.OrdreNummer == SelectedOrdre.OrdreNummer select ordre).FirstOrDefault();
                 //Ordre NewOrdre = new Ordre(GetOrdre.Date, GetOrdre.Laminering, GetOrdre.Fragt, GetOrdre.OpTil10, GetOrdre.Montering, GetOrdre.Afhentes, GetOrdre.KundeCVRnummer, GetOrdre.ProduktCollection);
                 //OrdrerCollection.Remove(GetOrdre);
-                if (KundeCVRnummer != "")
+                if (KundeCVRnummer != null)
                 {
                     GetOrdre.KundeCVRnummer = KundeCVRnummer;
                 }
@@ -272,7 +393,7 @@ namespace _1.semesterprojekt
 
             if (SelectedIndex > -1)
             {
-                
+
             }
             SaveOrdrer();
             OnPropertyChanged();
@@ -285,6 +406,20 @@ namespace _1.semesterprojekt
                 var OrdreToAccepter = (from ordre in OrdrerCollection where SelectedOrdre.OrdreNummer == ordre.OrdreNummer select ordre).FirstOrDefault();
 
                 OrdreToAccepter.Accepteret = true;
+                OrdreToAccepter.Status = "Accepteret af kunde. Ordre igangsat";
+
+                SaveOrdrer();
+                OnPropertyChanged();
+            }
+        }
+        public void AnnulerOrdre()
+        {
+            if (SelectedOrdre != null)
+            {
+                var OrdreToAnnuler = (from ordre in OrdrerCollection where SelectedOrdre.OrdreNummer == ordre.OrdreNummer select ordre).FirstOrDefault();
+
+                OrdreToAnnuler.Accepteret = false;
+                OrdreToAnnuler.Status = "Afventer svar fra kunde";
 
                 SaveOrdrer();
                 OnPropertyChanged();
@@ -297,7 +432,15 @@ namespace _1.semesterprojekt
             {
                 var OrdreToActivate = (from ordre in DeaktiveredeOrdrerCollection where SelectedOrdre.OrdreNummer == ordre.OrdreNummer select ordre).FirstOrDefault();
 
-                OrdreToActivate.Aktiveret = true;
+                if (OrdreToActivate.Accepteret == true)
+                {
+                    OrdreToActivate.Status = "Ordre igangsat";
+                }
+                else
+                {
+                    OrdreToActivate.Status = "Afventer svar fra kunde";
+                }
+               
                 DeaktiveredeOrdrerCollection.Remove(OrdreToActivate);
                 OrdrerCollection.Add(OrdreToActivate);
                 SaveOrdrer();
@@ -311,7 +454,7 @@ namespace _1.semesterprojekt
             {
                 var OrdreToDeactivate = (from ordre in OrdrerCollection where SelectedOrdre.OrdreNummer == ordre.OrdreNummer select ordre).FirstOrDefault();
 
-                OrdreToDeactivate.Aktiveret = false;
+                OrdreToDeactivate.Status = "Ordre stoppet";
                 OrdrerCollection.Remove(OrdreToDeactivate);
                 DeaktiveredeOrdrerCollection.Add(OrdreToDeactivate);
                 SaveOrdrer();
@@ -334,9 +477,12 @@ namespace _1.semesterprojekt
 
         public void OpretKunde()
         {
-            KundeCollection.Add(new Kunde(KundeCVRnummer, Navn, Firma, Adresse, By, Postnr, Mail, Telefonnr));
-            OnPropertyChanged();
-            SaveKunder();
+            if (KundeCVRnummer != null && Navn != null && Mail != null && Telefonnr != null && Mail.Contains("@") && Mail.Contains(".") && !Telefonnr.Any(char.IsLetter) && !KundeCVRnummer.Any(char.IsLetter))
+            {
+                KundeCollection.Add(new Kunde(KundeCVRnummer, Navn, Firma, Adresse, By, Postnr, Mail, Telefonnr));
+                OnPropertyChanged();
+                SaveKunder();
+            }
         }
 
         public void OpdaterKunde()
@@ -344,7 +490,7 @@ namespace _1.semesterprojekt
             var GetKunde = (from kunde in KundeCollection where kunde.Id == SelectedKunde.Id select kunde).FirstOrDefault();
 
             #region IfStatements (validering på om tekstbokse er udfyldt)
-            if (KundeCVRnummer != "")
+            if (KundeCVRnummer != null)
             {
                 GetKunde.KundeCVRnummer = KundeCVRnummer;
             }
@@ -375,7 +521,7 @@ namespace _1.semesterprojekt
             if (Telefonnr != "")
             {
                 GetKunde.Telefonnr = Telefonnr;
-            } 
+            }
             #endregion
 
             OnPropertyChanged();

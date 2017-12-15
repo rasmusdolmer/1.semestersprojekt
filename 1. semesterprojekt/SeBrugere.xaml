@@ -13,7 +13,6 @@
             <Grid>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                     <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="Email: " FontWeight="Medium"/>
                         <Run Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                 </StackPanel>
@@ -25,7 +24,15 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView x:Name="LWOrdrer1" HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="959" ItemsSource="{Binding BrugerCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedBruger, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="204,0,0,0"/>
+        <ListView x:Name="LWOrdrer1" HorizontalAlignment="Left" Height="1024" VerticalAlignment="Top" Width="959" ItemsSource="{Binding BrugerCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedBruger, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="204,56,0,0">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Email" FontWeight="Medium" MinWidth="124" Margin="12,0,0,0"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+        </ListView>
         <Button x:Name="BTN_Tilbage1" Content="&lt;" HorizontalAlignment="Left" Margin="82,495,0,0" VerticalAlignment="Top" Width="90" Height="90" Background="#CFFFFFFF" FontFamily="Arial" BorderBrush="#DBFFFFFF" FontSize="72" Foreground="#E0333333">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
@@ -57,6 +64,13 @@
             </Interactivity:Interaction.Behaviors>
         </Button>
         <PasswordBox x:Name="TBKodeord" HorizontalAlignment="Left" Margin="1210,535,0,0" VerticalAlignment="Top" Height="56" Width="535" Background="#FFEEEEEE" BorderBrush="#26000000" Password="{Binding Kodeord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" Margin="218,14,0,0" TextWrapping="Wrap" Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="294" Background="#66EEEEEE" BorderBrush="#26000000" PlaceholderText="Search input">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="TextChanged">
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SearchFilterBrugere"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+        </TextBox>
 
 
     </Grid>

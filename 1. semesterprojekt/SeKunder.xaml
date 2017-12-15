@@ -11,37 +11,29 @@
     <Page.Resources>
         <DataTemplate x:Key="test">
             <Grid>
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="CVR-nummer: " FontWeight="Medium"/>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="124">
                         <Run Text="{Binding KundeCVRnummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="Navn: " FontWeight="Medium"/>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="200">
                         <Run Text="{Binding Navn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="Firma: " FontWeight="Medium"/>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="144">
                         <Run Text="{Binding Firma, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="Adresse: " FontWeight="Medium"/>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="144">
                         <Run Text="{Binding Adresse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="By: " FontWeight="Medium"/>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="124">
                         <Run Text="{Binding By, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="Postnr: " FontWeight="Medium"/>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="124">
                         <Run Text="{Binding Postnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="Mail: " FontWeight="Medium"/>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="200">
                         <Run Text="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Text="">
-                        <Run Text="Telefonnr: " FontWeight="Medium"/>
+                    <TextBlock TextWrapping="Wrap" Text="" MinWidth="124">
                         <Run Text="{Binding Telefonnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                 </StackPanel>
@@ -54,7 +46,22 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <ListView x:Name="LWOrdrer1" HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="959" ItemsSource="{Binding KundeCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedKunde, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="204,0,0,0"/>
+        <ListView x:Name="LWOrdrer1" HorizontalAlignment="Left" Height="1014" VerticalAlignment="Top" Width="1217" ItemsSource="{Binding KundeCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource test}" SelectedItem="{Binding SelectedKunde, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="204,66,0,0">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="CVR-nummer" FontWeight="Medium" MinWidth="124" Margin="12,0,0,0"></TextBlock>
+                        <TextBlock Text="Navn" FontWeight="Medium" MinWidth="200"></TextBlock>
+                        <TextBlock Text="Firma" FontWeight="Medium" MinWidth="144"></TextBlock>
+                        <TextBlock Text="Adresse" FontWeight="Medium" MinWidth="144"></TextBlock>
+                        <TextBlock Text="By" FontWeight="Medium" MinWidth="124"></TextBlock>
+                        <TextBlock Text="Postnr" FontWeight="Medium" MinWidth="124"></TextBlock>
+                        <TextBlock Text="Mail" FontWeight="Medium" MinWidth="200"></TextBlock>
+                        <TextBlock Text="Telefonnr" FontWeight="Medium" MinWidth="124"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+        </ListView>
         <Button x:Name="BTN_Tilbage1" Content="&lt;" HorizontalAlignment="Left" Margin="82,495,0,0" VerticalAlignment="Top" Width="90" Height="90" Background="#CFFFFFFF" FontFamily="Arial" BorderBrush="#DBFFFFFF" FontSize="72" Foreground="#E0333333">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
@@ -62,36 +69,52 @@
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="1261,187,0,0" TextWrapping="Wrap" Text="Kunde" VerticalAlignment="Top" Width="420" TextAlignment="Center" FontSize="30" FontWeight="SemiBold" Foreground="#D8000000"/>
-        <Button x:Name="BTN_OpretKunde" Content="Opret Kunde" HorizontalAlignment="Left" Margin="1261,780,0,0" VerticalAlignment="Top" Width="130" Height="40" Background="#FF00E676" FontFamily="Arial" BorderBrush="#7F00C853">
+        <TextBlock HorizontalAlignment="Left" Margin="1453,187,0,0" TextWrapping="Wrap" Text="Kunde" VerticalAlignment="Top" Width="390" TextAlignment="Center" FontSize="30" FontWeight="SemiBold" Foreground="#D8000000"/>
+        <Button x:Name="BTN_OpretKunde" Content="Opret Kunde" HorizontalAlignment="Left" Margin="1453,780,0,0" VerticalAlignment="Top" Width="126" Height="40" Background="#FF00E676" FontFamily="Arial" BorderBrush="#7F00C853">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpretKunde"/>
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpretProdukt"/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBCVRNummer}" PropertyName="Text" Value=""/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBNavn}" PropertyName="Text" Value=""/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBFirma}" PropertyName="Text" Value=""/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBAdresse}" PropertyName="Text" Value=""/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBBy}" PropertyName="Text" Value=""/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBPostnr}" PropertyName="Text" Value=""/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBMail}" PropertyName="Text" Value=""/>
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=TBTlfnr}" PropertyName="Text" Value=""/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <Button x:Name="BTN_OpdaterKunde" Content="Opdater Kunde" HorizontalAlignment="Left" Margin="1406,780,0,0" VerticalAlignment="Top" Width="130" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
+        <Button x:Name="BTN_OpdaterKunde" Content="Opdater Kunde" HorizontalAlignment="Left" Margin="1585,780,0,0" VerticalAlignment="Top" Width="126" Height="40" Background="#FF448AFF" FontFamily="Arial" BorderBrush="#FF2962FF">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OpdaterKunde"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
-        <TextBox x:Name="TBCVRNummer" HorizontalAlignment="Left" Margin="1261,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="CVR-nummer" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding KundeCVRnummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TBNavn" HorizontalAlignment="Left" Margin="1261,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Navn" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Navn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TBFirma" HorizontalAlignment="Left" Margin="1261,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Firma" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Firma, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TBAdresse" HorizontalAlignment="Left" Margin="1261,437,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Adresse" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Adresse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TBBy" HorizontalAlignment="Left" Margin="1261,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="By" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding By, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TBPostnr" HorizontalAlignment="Left" Margin="1261,577,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Postnr." Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Postnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TBMail" HorizontalAlignment="Left" Margin="1261,649,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Mail" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TBTlfnr" HorizontalAlignment="Left" Margin="1261,719,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="420" PlaceholderText="Telefonnummer" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Telefonnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button x:Name="BTN_SletKunde" Content="Slet Kunde" HorizontalAlignment="Left" Margin="1551,780,0,0" VerticalAlignment="Top" Width="130" Height="40" Background="#FF1744" FontFamily="Arial" BorderBrush="#B71C1C">
+        <TextBox x:Name="TBCVRNummer" HorizontalAlignment="Left" Margin="1453,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="CVR-nummer" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding KundeCVRnummer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TBNavn" HorizontalAlignment="Left" Margin="1453,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="Navn" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Navn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TBFirma" HorizontalAlignment="Left" Margin="1453,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="Firma" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Firma, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TBAdresse" HorizontalAlignment="Left" Margin="1453,437,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="Adresse" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Adresse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TBBy" HorizontalAlignment="Left" Margin="1453,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="By" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding By, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TBPostnr" HorizontalAlignment="Left" Margin="1453,577,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="Postnr." Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Postnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TBMail" HorizontalAlignment="Left" Margin="1453,649,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="Mail" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TBTlfnr" HorizontalAlignment="Left" Margin="1453,719,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="390" PlaceholderText="Telefonnummer" Background="#FFEEEEEE" BorderBrush="#26000000" TextAlignment="Left" Text="{Binding Telefonnr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button x:Name="BTN_SletKunde" Content="Slet Kunde" HorizontalAlignment="Left" Margin="1716,780,0,0" VerticalAlignment="Top" Width="126" Height="40" Background="#FF1744" FontFamily="Arial" BorderBrush="#B71C1C">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Click">
                     <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SletKunde"/>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Button>
+        <TextBox HorizontalAlignment="Left" Margin="218,14,0,0" TextWrapping="Wrap" Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="1172" Background="#66EEEEEE" BorderBrush="#26000000" PlaceholderText="Search input">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="TextChanged">
+                    <Core:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="SearchFilterKunder"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+        </TextBox>
 
     </Grid>
 </Page>
